@@ -1,4 +1,4 @@
-package br.udesc.drinkappddm
+package br.udesc.drinkappddm.View
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth //autenticação para o FireBASe - J.parro
     private var binding: ActivityMainBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,12 +27,12 @@ class MainActivity : AppCompatActivity() {
             if(email.isNotEmpty() && password.isNotEmpty()){
                 signInWithEmailAndPassword(email,password)
             }else {
-                Toast.makeText(this@MainActivity,"Por favor, preencha os campos",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity,"Por favor, preencha os campos",Toast.LENGTH_SHORT).show()
             }
         }
 
         binding?.tvCreateAccount?.setOnClickListener {
-            val intent = Intent(this@MainActivity, RegisterActivity::class.java)
+            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivity(intent)
         }
     }

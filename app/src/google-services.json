@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "956138415723",
+    "project_id": "dispositivosmoveis-udesc",
+    "storage_bucket": "dispositivosmoveis-udesc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956138415723:android:3b0c3b85c45969e1bff32e",
+        "android_client_info": {
+          "package_name": "br.udesc.drinkappddm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "956138415723-ofgmie21gtqs47q0rm09a4hfjb4q87le.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.udesc.drinkappddm",
+            "certificate_hash": "e1565fb7abff431940bceac999071375de44ee3b"
+          }
+        },
+        {
+          "client_id": "956138415723-pk2n48pl1isvnhr7h1smdqn3pk0clrqh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDecgpHnXANoTPJAVI6XCIZI6n-MbdbFV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "956138415723-pk2n48pl1isvnhr7h1smdqn3pk0clrqh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

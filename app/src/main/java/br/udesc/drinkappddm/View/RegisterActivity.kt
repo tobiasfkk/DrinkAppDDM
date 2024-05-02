@@ -1,4 +1,4 @@
-package br.udesc.drinkappddm
+package br.udesc.drinkappddm.View
 
 import android.os.Bundle
 import android.util.Log
@@ -32,6 +32,9 @@ class RegisterActivity : AppCompatActivity(){
                 }
 
             }
+        }
+        binding?.btnVoltar?.setOnClickListener{
+            finish()//aqui ta errado, ele destroi a activty , tem que ver como faz pra retornar para a tela usand oa arvore. J.PARRO
         }
 
     }

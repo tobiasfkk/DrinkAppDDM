@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".View.RegisterActivity">
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -47,5 +47,13 @@
         android:layout_below="@id/etConfirmPassword"
         android:layout_marginTop="24dp"
         android:text="Confirmar"/>
+
+    <Button
+        android:id="@+id/btnVoltar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etConfirmPassword"
+        android:layout_marginTop="65dp"
+        android:text="Voltar"/>
 
 </RelativeLayout>
