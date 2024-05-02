@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "956138415723",
+    "project_id": "dispositivosmoveis-udesc",
+    "storage_bucket": "dispositivosmoveis-udesc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956138415723:android:3b0c3b85c45969e1bff32e",
+        "android_client_info": {
+          "package_name": "br.udesc.drinkappddm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDecgpHnXANoTPJAVI6XCIZI6n-MbdbFV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
