@@ -21,8 +21,12 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth//J.Parro
 
         binding?.btnLogin?.setOnClickListener{//RECUPERANDO OS DADOS DA TELA DE LOGIN
-            val email: String = binding?.etEmail?.text.toString()
-            val password: String = binding?.etPassword?.text.toString()
+            //val email: String = binding?.etEmail?.text.toString()
+            //val password: String = binding?.etPassword?.text.toString()
+
+            val email: String = "teste@teste.com"
+            val password: String = "12345678"
+
 
             if(email.isNotEmpty() && password.isNotEmpty()){
                 signInWithEmailAndPassword(email,password)
@@ -37,12 +41,19 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun startActivity() {
+        val intent = Intent(this, ProdutoActivity::class.java)
+        startActivity(intent)
+        //finish() //  eencerra a tela
+    }
+
     private fun signInWithEmailAndPassword(email: String, password: String){
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener { task ->
             if(task.isSuccessful){
                 Log.d(TAG,"signInUserWithEmailAndPassWord")
                 //val user = auth.currentUser
                 Toast.makeText(baseContext, "Login Sucess", Toast.LENGTH_SHORT).show()
+                startActivity()
             }else {
                 Log.w(TAG, "signInUserWithEmailAndPassaword:Failure", task.exception)
                 Toast.makeText(baseContext, "Authentication Failure", Toast.LENGTH_SHORT).show()

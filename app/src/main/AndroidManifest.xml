@@ -31,6 +31,11 @@
             android:exported="true"
             android:label="Register">
         </activity>
+        <activity
+            android:name=".View.ProdutoActivity"
+            android:exported="true"
+            android:excludeFromRecents="true">
+        </activity>
     </application>
 
 </manifest>
