@@ -1,47 +1,62 @@
 package br.udesc.drinkappddm.View
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import br.udesc.drinkappddm.Model.Categoria
 import br.udesc.drinkappddm.Model.Produto
 import br.udesc.drinkappddm.databinding.ActivityProdutoBinding
 import br.udesc.drinkappddm.ViewModel.ProdutoViewModel
-
-import kotlinx.coroutines.*
-
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ProdutoActivity : AppCompatActivity() {
 
     private lateinit var viewModel: ProdutoViewModel
-    private lateinit var binding: ActivityProdutoBinding // Usando ViewBinding para acessar os componentes da UI
+    private lateinit var binding: ActivityProdutoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_produto)//setando a tela xml
         binding = ActivityProdutoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        // Obtém a ViewModel, passando o contexto da atividade
         viewModel = ViewModelProvider(this).get(ProdutoViewModel::class.java)
 
-
-        // Cria o objeto Produto
-        //val produto = Produto(1, "Refrigerante", "https://example.com/refrigerante.png", 5.00)
-        // Recuperar os valores dos campos da tela
-        binding.produtoSalvar.setOnClickListener {
-            val produtoNome: String = binding.produtoNome.text.toString()
-            val produtoImagem: String = binding.produtoImagem.text.toString()
-            val produtoPrecoStr: String = binding.produtoPreco.text.toString()
-            val produtoPreco: Double = produtoPrecoStr.toDoubleOrNull() ?: 0.0
-
-            val produto = Produto(produtoNome, produtoImagem, produtoPreco)
-            // Adiciona o produto ao Firebase
-
-
-            GlobalScope.launch(Dispatchers.IO) {
-                viewModel.addProduto(produto)
+        // Configurar o Spinner de Categorias
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.produtoCategoriaSpinner.adapter = adapter
+        // Obter categorias da ViewModel e preencher o Spinner
+        viewModel.obterCategorias()
+        viewModel.categorias.observe(this) { categorias ->
+            categorias?.let {
+                adapter.clear()
+                for (categoria in it) {
+                    adapter.add(categoria.nome)
+                }
             }
+        }
+
+        // Configurar o clique no botão "Salvar Produto"
+        binding.produtoSalvar.setOnClickListener {
+            salvarProduto()
+        }
+    }
+
+    private fun salvarProduto() {
+        val produtoNome = binding.produtoNome.text.toString()
+        val produtoImagem = binding.produtoImagem.text.toString()
+        val produtoPrecoStr = binding.produtoPreco.text.toString()
+        val produtoPreco = produtoPrecoStr.toDoubleOrNull() ?: 0.0
+
+        val categoriaSelecionada = binding.produtoCategoriaSpinner.selectedItem.toString()
+
+        val produto = Produto(produtoNome, produtoImagem, produtoPreco, Categoria(categoriaSelecionada))
+
+
+        GlobalScope.launch(Dispatchers.IO) {
+            viewModel.addProduto(produto)
         }
     }
 }
-
