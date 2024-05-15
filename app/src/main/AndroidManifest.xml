@@ -36,6 +36,11 @@
             android:exported="true"
             android:excludeFromRecents="true">
         </activity>
+        <activity
+            android:name=".View.PagamentoActivity"
+            android:exported="true"
+            android:excludeFromRecents="true">
+        </activity>
     </application>
 
 </manifest>
