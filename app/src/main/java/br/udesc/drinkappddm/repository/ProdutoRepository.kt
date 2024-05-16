@@ -31,4 +31,21 @@ class ProdutoRepository() {
             emptyList()
         }
     }
+
+    suspend fun obterProdutosPorCategoria(categoria: Categoria): List<Produto> {
+        return try {
+            val produtosSnapshot = produtosCollection.whereEqualTo("categoria", categoria.nome).get().await()
+            val produtosList = mutableListOf<Produto>()
+            for (produtoSnapshot in produtosSnapshot.documents) {
+                val nome = produtoSnapshot.getString("nome") ?: continue
+                val imagem = produtoSnapshot.getString("imagem") ?: continue
+                val preco = produtoSnapshot.getDouble("preco") ?: continue
+                produtosList.add(Produto(nome, imagem, preco, categoria))
+            }
+            produtosList
+        } catch (e: Exception) {
+            // Lidar com erros de obtenção dos produtos, por exemplo, lançar uma exceção ou retornar uma lista vazia
+            emptyList()
+        }
+    }
 }

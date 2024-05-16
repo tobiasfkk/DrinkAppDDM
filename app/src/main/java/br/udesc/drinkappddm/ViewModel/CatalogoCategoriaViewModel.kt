@@ -9,31 +9,17 @@ import br.udesc.drinkappddm.Model.Produto
 import br.udesc.drinkappddm.repository.ProdutoRepository
 import kotlinx.coroutines.launch
 
-
-class ProdutoViewModel : ViewModel() {
-
+class CatalogoCategoriaViewModel : ViewModel() {
     private val produtoRepository = ProdutoRepository()
     private val _categorias = MutableLiveData<List<Categoria>>()
-    val categorias: LiveData<List<Categoria>> = _categorias
+    val categorias: LiveData<List<Categoria>> get() = _categorias
 
-
-//    suspend fun addProduto(produto: Produto) {
-//        produtoRepository.addProduto(produto)
-//    }
-
-    suspend fun addProduto(produto: Produto) {
-        viewModelScope.launch {
-            produtoRepository.addProduto(produto)
-        }
-    }
-
-    fun obterCategorias(): LiveData<List<Categoria>> {
-        val categoriasLiveData = MutableLiveData<List<Categoria>>()
+    fun obterCategorias() {
         viewModelScope.launch {
             val categoriasList = produtoRepository.obterCategorias()
-            categoriasLiveData.value = categoriasList
+            _categorias.value = categoriasList
         }
-        return categoriasLiveData
     }
-
 }
+
+
