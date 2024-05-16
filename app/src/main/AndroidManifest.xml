@@ -46,7 +46,11 @@
             android:exported="true"
             android:label="CatalogoProdutoActivity">
         </activity>
-
+        <activity
+            android:name=".View.PagamentoActivity"
+            android:exported="true"
+            android:excludeFromRecents="true">
+        </activity>
     </application>
 
 </manifest>

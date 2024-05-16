@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_titulo_pagamento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pagamento"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_dados_cartao"
+        android:layout_width="412dp"
+        android:layout_height="299dp"
+        android:orientation="vertical"
+        android:padding="20dp"
+        tools:layout_editor_absoluteX="-1dp">
+
+        <EditText
+            android:id="@+id/et_nome_cartao"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="Nome no Cartão" />
+
+        <EditText
+            android:id="@+id/et_numero_cartao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Número do Cartão"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/et_validade_cartao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Validade (MM/AA)"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/et_cvv_cartao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CVV"
+            android:inputType="numberPassword" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_cancelar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/btn_pagar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Continuar"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
