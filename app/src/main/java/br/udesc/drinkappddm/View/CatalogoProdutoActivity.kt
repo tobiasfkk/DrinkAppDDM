@@ -1,12 +1,12 @@
 package br.udesc.drinkappddm.View
 
-import android.R
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.udesc.drinkappddm.Model.Categoria
+import br.udesc.drinkappddm.R
 import br.udesc.drinkappddm.ViewModel.CatalogoProdutoViewModel
 import br.udesc.drinkappddm.databinding.ActivityCatalogoProdutoBinding
 
@@ -21,7 +21,7 @@ class CatalogoProdutoActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(CatalogoProdutoViewModel::class.java)
 
-        val adapter = ArrayAdapter<String>(this, R.layout.simple_list_item_1)
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
         val listView = findViewById<ListView>(br.udesc.drinkappddm.R.id.produtoListView)
         listView.adapter = adapter
 
@@ -37,19 +37,9 @@ class CatalogoProdutoActivity : AppCompatActivity() {
                     }
                 }
             }
-        }
 
-        if (categoriaSelecionada != null) {
-            viewModel.produtos.observe(this) { produtos ->
-                produtos?.let {
-                    adapter.clear()
-                    for (produto in it) {
-                        adapter.add(produto.nome)
-                    }
-                }
-                viewModel.obterProdutosPorCategoria(categoriaSelecionada) // Chama o método dentro do bloco if
-            }
+            // Chama o método para obter os produtos por categoria
+            viewModel.obterProdutosPorCategoria(categoriaSelecionada)
         }
-
     }
 }
