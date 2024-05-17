@@ -22,7 +22,7 @@ class CatalogoProdutoActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(CatalogoProdutoViewModel::class.java)
 
         val adapter = ArrayAdapter<String>(this, R.layout.simple_list_item_1)
-        val listView = findViewById<ListView>(br.udesc.drinkappddm.R.id.catalogoListView)
+        val listView = findViewById<ListView>(br.udesc.drinkappddm.R.id.produtoListView)
         listView.adapter = adapter
 
         // Obtém a categoria selecionada da Intent
