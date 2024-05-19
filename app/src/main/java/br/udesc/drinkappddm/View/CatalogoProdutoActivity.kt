@@ -1,13 +1,14 @@
 package br.udesc.drinkappddm.View
 
+import ProdutoAdapter
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.udesc.drinkappddm.Model.Categoria
 import br.udesc.drinkappddm.R
 import br.udesc.drinkappddm.ViewModel.CatalogoProdutoViewModel
+import br.udesc.drinkappddm.Model.Produto
 import br.udesc.drinkappddm.databinding.ActivityCatalogoProdutoBinding
 
 class CatalogoProdutoActivity : AppCompatActivity() {
@@ -21,9 +22,7 @@ class CatalogoProdutoActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(CatalogoProdutoViewModel::class.java)
 
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
-        val listView = findViewById<ListView>(br.udesc.drinkappddm.R.id.produtoListView)
-        listView.adapter = adapter
+        val listView = findViewById<ListView>(R.id.produtoListView)
 
         // Obtém a categoria selecionada da Intent
         val categoriaSelecionada = intent.getSerializableExtra("categoria") as? Categoria
@@ -31,10 +30,9 @@ class CatalogoProdutoActivity : AppCompatActivity() {
         if (categoriaSelecionada != null) {
             viewModel.produtos.observe(this) { produtos ->
                 produtos?.let {
-                    adapter.clear()
-                    for (produto in it) {
-                        adapter.add(produto.nome)
-                    }
+                    // Instancia o adaptador personalizado
+                    val adapter = ProdutoAdapter(this, it)
+                    listView.adapter = adapter
                 }
             }
 

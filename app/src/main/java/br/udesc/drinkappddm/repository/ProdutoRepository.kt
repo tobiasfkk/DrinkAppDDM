@@ -38,7 +38,8 @@ class ProdutoRepository {
                 val nome = produtoSnapshot.getString("nome") ?: continue
                 val imagem = produtoSnapshot.getString("imagem") ?: continue
                 val preco = produtoSnapshot.getDouble("preco") ?: continue
-                produtosList.add(Produto(nome, imagem, preco, categoria))
+                val descricao = produtoSnapshot.getString("descricao") ?: continue
+                produtosList.add(Produto(nome, imagem, preco, categoria, descricao))
             }
             produtosList
         } catch (e: Exception) {

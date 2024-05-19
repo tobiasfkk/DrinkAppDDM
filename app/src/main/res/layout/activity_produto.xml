@@ -30,6 +30,13 @@
                 android:inputType="text" />
 
             <EditText
+                android:id="@+id/produto_descricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Descricao Produto"
+                android:inputType="text" />
+
+            <EditText
                 android:id="@+id/produto_imagem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
