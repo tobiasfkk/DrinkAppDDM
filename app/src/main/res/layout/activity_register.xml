@@ -93,7 +93,7 @@
             android:layout_gravity="center_horizontal"
             android:scaleType="fitCenter"
             android:layout_marginBottom="30dp"
-            android:src="@drawable/Logo_sem_fundo"/>
+            android:src="@drawable/logosemfundo"/>
 
     </LinearLayout>
 
