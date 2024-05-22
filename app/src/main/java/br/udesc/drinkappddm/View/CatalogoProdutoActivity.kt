@@ -1,6 +1,6 @@
 package br.udesc.drinkappddm.View
 
-import ProdutoAdapter
+//import ProdutoAdapter
 import android.os.Bundle
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +22,7 @@ class CatalogoProdutoActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(CatalogoProdutoViewModel::class.java)
 
-        val listView = findViewById<ListView>(R.id.produtoListView)
+        val listView = binding.produtoListView
 
         // Obtém a categoria selecionada da Intent
         val categoriaSelecionada = intent.getSerializableExtra("categoria") as? Categoria
