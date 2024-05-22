@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradienttelas"
     tools:context=".View.ProdutoActivity">
 
     <ScrollView
@@ -20,12 +21,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="48dp"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/barlow_semibold"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:shadowColor="#FF000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="3"
+                android:text="Cadastro de produto"
+                android:textColor="#333333"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/produto_imagem_view"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitCenter"
+                />
 
             <EditText
                 android:id="@+id/produto_nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/barlow_semibold"
                 android:hint="Nome Produto"
                 android:inputType="text" />
 
@@ -33,20 +64,16 @@
                 android:id="@+id/produto_imagem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/barlow_semibold"
                 android:hint="Imagem Produto"
                 android:inputType="text" />
 
-            <ImageView
-                android:id="@+id/produto_imagem_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:scaleType="fitCenter" />
 
             <EditText
                 android:id="@+id/produto_preco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/barlow_semibold"
                 android:hint="Valor Produto"
                 android:inputType="numberDecimal" />
 
@@ -54,8 +81,19 @@
                 android:id="@+id/produto_salvar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/barlow_semibold"
+                android:backgroundTint="#FF6EC7"
                 android:text="SALVAR PRODUTO" />
+
+            <ImageView
+                android:id="@+id/imageViewLogo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitCenter"
+                android:layout_marginBottom="30dp"
+                android:src="@drawable/Logo_sem_fundo"/>
 
         </LinearLayout>
 

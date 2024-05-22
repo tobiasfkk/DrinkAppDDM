@@ -3,57 +3,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradienttelas"
     tools:context=".View.RegisterActivity">
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registrando Usuário"
-        android:textSize="24sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"/>
-
-    <EditText
-        android:id="@+id/etEmail"
+    <LinearLayout
+        android:id="@+id/produto_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewTitle"
-        android:layout_marginTop="24dp"
-        android:hint="Informe o Email"/>
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center">
 
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etEmail"
-        android:layout_marginTop="12dp"
-        android:inputType="textPassword"
-        android:hint="Informe a Senha"/>
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="48dp"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/barlow_semibold"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:shadowColor="#FF000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:text="Registrando Usuário"
+            android:textColor="#333333"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/etConfirmPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etPassword"
-        android:layout_marginTop="12dp"
-        android:inputType="textPassword"
-        android:hint="Confirme a Senha"/>
 
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etConfirmPassword"
-        android:layout_marginTop="24dp"
-        android:text="Confirmar"/>
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="@font/barlow_semibold"
+            android:layout_marginTop="70dp"
+            android:hint="Informe o Email"
+            android:textColor="@android:color/black" />
 
-    <Button
-        android:id="@+id/btnVoltar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etConfirmPassword"
-        android:layout_marginTop="65dp"
-        android:text="Voltar"/>
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/etEmail"
+            android:fontFamily="@font/barlow_semibold"
+            android:layout_marginTop="12dp"
+            android:inputType="textPassword"
+            android:hint="Informe a Senha"
+            android:textColor="@android:color/black" />
+
+        <EditText
+            android:id="@+id/etConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/etPassword"
+            android:layout_marginTop="12dp"
+            android:inputType="textPassword"
+            android:fontFamily="@font/barlow_semibold"
+            android:hint="Confirme a Senha"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etConfirmPassword"
+            android:layout_marginTop="24dp"
+            android:text="Confirmar"
+            android:backgroundTint="#FF6EC7"
+            android:textColor="#FFFFFF" />
+
+
+        <Button
+            android:id="@+id/btnVoltar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnRegister"
+            android:layout_marginTop="16dp"
+            android:text="Voltar"
+            android:backgroundTint="#FF6EC7"
+            android:textColor="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitCenter"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/Logo_sem_fundo"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
