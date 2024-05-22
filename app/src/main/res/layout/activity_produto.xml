@@ -84,6 +84,14 @@
                 android:hint="Valor Produto"
                 android:inputType="numberDecimal" />
 
+            <EditText
+                android:id="@+id/produto_quantidade_estoque"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/barlow_semibold"
+                android:hint="Quantidade Estoque"
+                android:inputType="numberDecimal" />
+
             <!-- Substituímos o EditText por um Spinner -->
             <Spinner
                 android:id="@+id/produto_categoria_spinner"
