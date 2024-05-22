@@ -51,8 +51,10 @@ class ProdutoActivity : AppCompatActivity() {
         val produtoPreco = produtoPrecoStr.toDoubleOrNull() ?: 0.0
         val categoriaSelecionada = binding.produtoCategoriaSpinner.selectedItem.toString()
         val descricao = binding.produtoDescricao.text.toString()
+        val quantidadeEstoqueStr = binding.produtoQuantidadeEstoque.text.toString()
+        val quantidadeEstoque = quantidadeEstoqueStr.toIntOrNull() ?: 0
 
-        val produto = Produto(produtoNome, produtoImagem, produtoPreco, Categoria(categoriaSelecionada), descricao)
+        val produto = Produto(produtoNome, produtoImagem, produtoPreco, Categoria(categoriaSelecionada), descricao, quantidadeEstoque)
 
 
         GlobalScope.launch(Dispatchers.IO) {
