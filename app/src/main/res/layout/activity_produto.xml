@@ -61,6 +61,13 @@
                 android:inputType="text" />
 
             <EditText
+                android:id="@+id/produto_descricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Descricao Produto"
+                android:inputType="text" />
+
+            <EditText
                 android:id="@+id/produto_imagem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,6 +83,13 @@
                 android:fontFamily="@font/barlow_semibold"
                 android:hint="Valor Produto"
                 android:inputType="numberDecimal" />
+
+            <!-- Substituímos o EditText por um Spinner -->
+            <Spinner
+                android:id="@+id/produto_categoria_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Categoria Produto" />
 
             <Button
                 android:id="@+id/produto_salvar"

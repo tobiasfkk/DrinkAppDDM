@@ -36,10 +36,24 @@
             android:exported="true"
             android:excludeFromRecents="true">
         </activity>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <activity
+            android:name=".View.CatalogoCategoriaActivity"
+            android:exported="true"
+            android:label="CatalogoCategoriaActivity">
+        </activity>
+        <activity
+            android:name=".View.CatalogoProdutoActivity"
+            android:exported="true"
+            android:label="CatalogoProdutoActivity">
+        </activity>
+        <activity
+            android:name=".View.PagamentoActivity"
+            android:exported="true"
+            android:excludeFromRecents="true">
+        </activity>
     </application>
 
 </manifest>
