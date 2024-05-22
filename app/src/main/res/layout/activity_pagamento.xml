@@ -3,37 +3,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradienttelas">
+
 
     <TextView
         android:id="@+id/tv_titulo_pagamento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pagamento"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="72dp"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/barlow_semibold"
         android:padding="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:shadowColor="#FF000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        android:text="Pagamento"
+        android:textColor="#333333"
+        android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/ll_dados_cartao"
-        android:layout_width="412dp"
-        android:layout_height="299dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:orientation="vertical"
-        android:padding="20dp"
-        tools:layout_editor_absoluteX="-1dp">
+        android:padding="40dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="144dp">
 
         <EditText
             android:id="@+id/et_nome_cartao"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_semibold"
             android:hint="Nome no Cartão" />
 
         <EditText
             android:id="@+id/et_numero_cartao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_semibold"
             android:hint="Número do Cartão"
             android:inputType="number" />
 
@@ -41,6 +59,7 @@
             android:id="@+id/et_validade_cartao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_semibold"
             android:hint="Validade (MM/AA)"
             android:inputType="number" />
 
@@ -48,30 +67,39 @@
             android:id="@+id/et_cvv_cartao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_semibold"
             android:hint="CVV"
             android:inputType="numberPassword" />
 
+        <Button
+            android:id="@+id/btn_pagar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/barlow_semibold"
+            android:backgroundTint="#FF6EC7"
+            android:text="Continuar" />
+
+        <Button
+            android:id="@+id/btn_cancelar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/barlow_semibold"
+            android:backgroundTint="#FF6EC7"
+            android:text="Cancelar" />
+
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logosemfundo"
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="492dp" />
 
-    <Button
-        android:id="@+id/btn_cancelar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Cancelar"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <Button
-        android:id="@+id/btn_pagar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Continuar"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
