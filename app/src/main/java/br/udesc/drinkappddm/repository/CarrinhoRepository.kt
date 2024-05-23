@@ -1,5 +1,6 @@
 package br.udesc.drinkappddm.repository
 
+import br.udesc.drinkappddm.Model.Categoria
 import br.udesc.drinkappddm.Model.ItemCarrinho
 import br.udesc.drinkappddm.Model.Produto
 import com.google.firebase.firestore.FirebaseFirestore
@@ -40,9 +41,18 @@ class CarrinhoRepository {
             val carrinhoSnapshot = carrinhoCollection.get().await()
             val carrinhoList = mutableListOf<ItemCarrinho>()
             for (itemSnapshot in carrinhoSnapshot.documents) {
-                val produto = itemSnapshot.toObject(Produto::class.java) ?: continue
+                val produtoNome = itemSnapshot.getString("produto.nome") ?: continue
+                val produtoImagem = itemSnapshot.getString("produto.imagem") ?: continue
+                val produtoPreco = itemSnapshot.getDouble("produto.preco") ?: continue
+                val produtoCategoriaNome = itemSnapshot.getString("produto.categoria.nome") ?: continue
+                val produtoDescricao = itemSnapshot.getString("produto.descricao") ?: continue
+                val produtoQuantidadeEstoque = itemSnapshot.getLong("produto.quantidadeEstoque")?.toInt() ?: continue
                 val quantidade = itemSnapshot.getLong("quantidade")?.toInt() ?: continue
-                carrinhoList.add(ItemCarrinho(produto, quantidade))
+
+                val categoria = Categoria(produtoCategoriaNome)
+                val produto = Produto(produtoNome, produtoImagem, produtoPreco, categoria, produtoDescricao, produtoQuantidadeEstoque)
+                val itemCarrinho = ItemCarrinho(produto, quantidade)
+                carrinhoList.add(itemCarrinho)
             }
             carrinhoList
         } catch (e: Exception) {
