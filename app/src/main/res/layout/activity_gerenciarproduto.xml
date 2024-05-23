@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradienttelas">
+
+    <TextView
+        android:id="@+id/tv_titulo_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/barlow_semibold"
+        android:padding="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:shadowColor="#FF000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        android:text="GERENCIA DE PRODUTOS"
+        android:textColor="#333333"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ll_buttons_produto"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_buttons_produto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_titulo_admin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imageView_logoadmin">
+
+        <Button
+            android:id="@+id/btn_cadastrarproduto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FF6EC7"
+            android:fontFamily="@font/barlow_semibold"
+            android:text="Cadastrar novo produto"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_editarproduto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#FF6EC7"
+            android:fontFamily="@font/barlow_semibold"
+            android:text="Alterar produto"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView_logoadmin"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logosemfundo"
+        app:layout_constraintTop_toBottomOf="@+id/ll_buttons_produto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
