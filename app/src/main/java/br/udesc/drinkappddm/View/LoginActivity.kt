@@ -36,13 +36,13 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding?.tvCreateAccount?.setOnClickListener {
-            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+           // val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivity(intent)
         }
     }
 
     private fun startActivity() {
-//        val intent = Intent(this, CatalogoCategoriaActivity::class.java)
+       // val intent = Intent(this, CatalogoCategoriaActivity::class.java)
 //        val intent = Intent(this, PagamentoActivity::class.java)
         val intent = Intent(this, ProdutoActivity::class.java)
 

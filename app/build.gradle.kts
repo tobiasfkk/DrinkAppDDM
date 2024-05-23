@@ -58,4 +58,6 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")//firebase - j.parro
     implementation("com.google.firebase:firebase-auth-ktx")//autenticação do firebase - j.parro
     implementation("com.google.firebase:firebase-database:16.0.4")
+    implementation(platform("com.google.firebase:firebase-bom:30.0.0"))
+    implementation("com.google.firebase:firebase-storage:20.0.0")
 }

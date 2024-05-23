@@ -10,9 +10,12 @@ class ProdutoRepository {
     private val produtosCollection = db.collection("produtos")
 
     suspend fun addProduto(produto: Produto) {
-        db.collection("produtos")
-            .add(produto)
-            .await()
+        try {
+            produtosCollection.add(produto).await()
+        } catch (e: Exception) {
+            // Tratar possíveis exceções aqui
+
+        }
     }
 
     suspend fun obterCategorias(): List<Categoria> {
@@ -32,14 +35,17 @@ class ProdutoRepository {
 
     suspend fun obterProdutosPorCategoria(categoria: Categoria): List<Produto> {
         return try {
-            val produtosSnapshot = produtosCollection.whereEqualTo("categoria.nome", categoria.nome).get().await()
+            val produtosSnapshot = produtosCollection
+                .whereEqualTo("categoria.nome", categoria.nome)
+                .get()
+                .await()
             val produtosList = mutableListOf<Produto>()
             for (produtoSnapshot in produtosSnapshot.documents) {
                 val nome = produtoSnapshot.getString("nome") ?: continue
                 val imagem = produtoSnapshot.getString("imagem") ?: continue
                 val preco = produtoSnapshot.getDouble("preco") ?: continue
                 val descricao = produtoSnapshot.getString("descricao") ?: continue
-                val quantidadeEstoque = produtoSnapshot.getDouble("quantidadeEstoque") ?: continue
+                val quantidadeEstoque = produtoSnapshot.getLong("quantidadeEstoque")?.toInt() ?: continue
                 produtosList.add(Produto(nome, imagem, preco, categoria, descricao, quantidadeEstoque))
             }
             produtosList
