@@ -5,14 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.NumberPicker
-import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import br.udesc.drinkappddm.Model.Produto
 import br.udesc.drinkappddm.R
+import br.udesc.drinkappddm.ViewModel.CarrinhoViewModel
+import br.udesc.drinkappddm.databinding.ActivityCatalogoProdutoDetalhesBinding
 
 class ProdutoAdapter(private val context: Context, private val produtos: List<Produto>) : BaseAdapter() {
+
+    private val carrinhoViewModel = ViewModelProvider(context as AppCompatActivity).get(CarrinhoViewModel::class.java)
 
     override fun getCount(): Int {
         return produtos.size
@@ -27,57 +30,48 @@ class ProdutoAdapter(private val context: Context, private val produtos: List<Pr
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val binding: ActivityCatalogoProdutoDetalhesBinding
         val view: View
-        val holder: ViewHolder
 
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.activity_catalogo_produto_detalhes, parent, false)
-            holder = ViewHolder(view)
-            view.tag = holder
+            binding = ActivityCatalogoProdutoDetalhesBinding.inflate(LayoutInflater.from(context), parent, false)
+            view = binding.root
+            view.tag = binding
         } else {
+            binding = convertView.tag as ActivityCatalogoProdutoDetalhesBinding
             view = convertView
-            holder = view.tag as ViewHolder
         }
 
         val produto = getItem(position)
-        holder.produtoNomeTextView.text = produto.nome
-        holder.produtoPrecoTextView.text = "Preço: R$ ${produto.preco}"
-        holder.produtoDescricaoTextView.text = produto.descricao
-        // Você pode definir a imagem do produto aqui se tiver
+        binding.produtoNomeTextView.text = produto.nome
+        binding.produtoPrecoTextView.text = "Preço: R$ ${produto.preco}"
+        binding.produtoDescricaoTextView.text = produto.descricao
 
         // Configurar NumberPicker
-        holder.produtoQuantidadePicker.minValue = 1
-        holder.produtoQuantidadePicker.maxValue = 5
-        holder.produtoQuantidadePicker.value = 1
+        binding.produtoQuantidadePicker.minValue = 1
+        binding.produtoQuantidadePicker.maxValue = 5
+        binding.produtoQuantidadePicker.value = 1
 
         view.setOnClickListener {
-            if (holder.produtoDescricaoTextView.visibility == View.GONE) {
-                holder.produtoPrecoTextView.visibility = View.VISIBLE
-                holder.produtoDescricaoTextView.visibility = View.VISIBLE
-                holder.produtoQuantidadePicker.visibility = View.VISIBLE
-                holder.addToCartButton.visibility = View.VISIBLE
+            if (binding.produtoDescricaoTextView.visibility == View.GONE) {
+                binding.produtoPrecoTextView.visibility = View.VISIBLE
+                binding.produtoDescricaoTextView.visibility = View.VISIBLE
+                binding.produtoQuantidadePicker.visibility = View.VISIBLE
+                binding.addToCartButton.visibility = View.VISIBLE
             } else {
-                holder.produtoPrecoTextView.visibility = View.GONE
-                holder.produtoDescricaoTextView.visibility = View.GONE
-                holder.produtoQuantidadePicker.visibility = View.GONE
-                holder.addToCartButton.visibility = View.GONE
+                binding.produtoPrecoTextView.visibility = View.GONE
+                binding.produtoDescricaoTextView.visibility = View.GONE
+                binding.produtoQuantidadePicker.visibility = View.GONE
+                binding.addToCartButton.visibility = View.GONE
             }
         }
 
-        holder.addToCartButton.setOnClickListener {
-            val quantidade = holder.produtoQuantidadePicker.value
-            // Lógica para adicionar ao carrinho com a quantidade selecionada
+        binding.addToCartButton.setOnClickListener {
+            val quantidade = binding.produtoQuantidadePicker.value
+            carrinhoViewModel.adicionarAoCarrinho(produto, quantidade)
+            Toast.makeText(context, "${produto.nome} adicionado ao carrinho", Toast.LENGTH_SHORT).show()
         }
 
         return view
     }
-
-    private class ViewHolder(view: View) {
-        val produtoNomeTextView: TextView = view.findViewById(R.id.produtoNomeTextView)
-        val produtoPrecoTextView: TextView = view.findViewById(R.id.produtoPrecoTextView)
-        val produtoDescricaoTextView: TextView = view.findViewById(R.id.produtoDescricaoTextView)
-        val produtoQuantidadePicker: NumberPicker = view.findViewById(R.id.produtoQuantidadePicker)
-        val addToCartButton: Button = view.findViewById(R.id.addToCartButton)
-    }
 }
-

@@ -1,14 +1,14 @@
 package br.udesc.drinkappddm.View
 
-//import ProdutoAdapter
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.udesc.drinkappddm.Model.Categoria
 import br.udesc.drinkappddm.R
 import br.udesc.drinkappddm.ViewModel.CatalogoProdutoViewModel
-import br.udesc.drinkappddm.Model.Produto
 import br.udesc.drinkappddm.databinding.ActivityCatalogoProdutoBinding
 
 class CatalogoProdutoActivity : AppCompatActivity() {
@@ -38,6 +38,13 @@ class CatalogoProdutoActivity : AppCompatActivity() {
 
             // Chama o método para obter os produtos por categoria
             viewModel.obterProdutosPorCategoria(categoriaSelecionada)
+        }
+
+        // Configurar o botão "Ver Carrinho"
+        val verCarrinhoButton: Button = findViewById(R.id.verCarrinhoButton)
+        verCarrinhoButton.setOnClickListener {
+            val intent = Intent(this, CarrinhoActivity::class.java)
+            startActivity(intent)
         }
     }
 }
