@@ -38,7 +38,7 @@
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="3"
-                android:text="CADASTRO DE PRODUTO"
+                android:text="ATUALIZAR PRODUTO"
                 android:textColor="#333333"
                 android:textSize="25dp"
                 android:textStyle="bold" />

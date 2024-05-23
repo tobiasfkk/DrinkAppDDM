@@ -54,6 +54,11 @@
             android:exported="true"
             android:excludeFromRecents="true">
         </activity>
+        <activity
+            android:name=".View.GerenciarProdutoActivity"
+            android:exported="true"
+            android:excludeFromRecents="true">
+        </activity>
     </application>
 
 </manifest>
