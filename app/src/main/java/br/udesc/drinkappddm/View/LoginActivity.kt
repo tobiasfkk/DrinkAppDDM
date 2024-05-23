@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import br.udesc.drinkappddm.ViewModel.CarrinhoViewModel
 import br.udesc.drinkappddm.databinding.ActivityMainBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -42,10 +44,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun startActivity() {
-       // val intent = Intent(this, CatalogoCategoriaActivity::class.java)
+        val intent = Intent(this, CatalogoCategoriaActivity::class.java)
 //        val intent = Intent(this, PagamentoActivity::class.java)
         //val intent = Intent(this, ProdutoActivity::class.java)
-        val intent = Intent(this, GerenciarProdutoActivity::class.java)
+//        val intent = Intent(this, GerenciarProdutoActivity::class.java)
         startActivity(intent)
         //finish() //  eencerra a tela
     }
@@ -56,6 +58,8 @@ class LoginActivity : AppCompatActivity() {
                 Log.d(TAG,"signInUserWithEmailAndPassWord")
                 //val user = auth.currentUser
                 Toast.makeText(baseContext, "Login Sucess", Toast.LENGTH_SHORT).show()
+                val carrinhoViewModel = ViewModelProvider(this).get(CarrinhoViewModel::class.java)
+                carrinhoViewModel.limparCarrinho()
                 startActivity()
             }else {
                 Log.w(TAG, "signInUserWithEmailAndPassaword:Failure", task.exception)

@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.udesc.drinkappddm.Model.Produto
-import br.udesc.drinkappddm.R
 import br.udesc.drinkappddm.ViewModel.CarrinhoViewModel
 import br.udesc.drinkappddm.databinding.ActivityCatalogoProdutoDetalhesBinding
 
@@ -17,17 +16,11 @@ class ProdutoAdapter(private val context: Context, private val produtos: List<Pr
 
     private val carrinhoViewModel = ViewModelProvider(context as AppCompatActivity).get(CarrinhoViewModel::class.java)
 
-    override fun getCount(): Int {
-        return produtos.size
-    }
+    override fun getCount(): Int = produtos.size
 
-    override fun getItem(position: Int): Produto {
-        return produtos[position]
-    }
+    override fun getItem(position: Int): Produto = produtos[position]
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val binding: ActivityCatalogoProdutoDetalhesBinding
@@ -53,17 +46,11 @@ class ProdutoAdapter(private val context: Context, private val produtos: List<Pr
         binding.produtoQuantidadePicker.value = 1
 
         view.setOnClickListener {
-            if (binding.produtoDescricaoTextView.visibility == View.GONE) {
-                binding.produtoPrecoTextView.visibility = View.VISIBLE
-                binding.produtoDescricaoTextView.visibility = View.VISIBLE
-                binding.produtoQuantidadePicker.visibility = View.VISIBLE
-                binding.addToCartButton.visibility = View.VISIBLE
-            } else {
-                binding.produtoPrecoTextView.visibility = View.GONE
-                binding.produtoDescricaoTextView.visibility = View.GONE
-                binding.produtoQuantidadePicker.visibility = View.GONE
-                binding.addToCartButton.visibility = View.GONE
-            }
+            val isVisible = binding.produtoDescricaoTextView.visibility == View.GONE
+            binding.produtoPrecoTextView.visibility = if (isVisible) View.VISIBLE else View.GONE
+            binding.produtoDescricaoTextView.visibility = if (isVisible) View.VISIBLE else View.GONE
+            binding.produtoQuantidadePicker.visibility = if (isVisible) View.VISIBLE else View.GONE
+            binding.addToCartButton.visibility = if (isVisible) View.VISIBLE else View.GONE
         }
 
         binding.addToCartButton.setOnClickListener {
