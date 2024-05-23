@@ -16,24 +16,21 @@ class CarrinhoViewModel : ViewModel() {
 
     init {
         _itens.value = mutableListOf()
-        if (_itens.value.isNullOrEmpty()) { // Verifica se a lista de itens está vazia
-            //limparCarrinho() // Limpa o carrinho ao iniciar o app se estiver vazio
-        }
         carregarItensDoCarrinho()
     }
 
     fun adicionarAoCarrinho(produto: Produto, quantidade: Int) {
         viewModelScope.launch {
             val lista = _itens.value ?: mutableListOf()
-            val itemExistente = lista.find { it.produto.nome == produto.nome } // Assuming unique product name
+            val itemExistente = lista.find { it.produto.nome == produto.nome }
             if (itemExistente != null) {
                 val novoItem = itemExistente.copy(quantidade = quantidade)
                 lista[lista.indexOf(itemExistente)] = novoItem
-                repository.atualizarItemCarrinho(novoItem) // Atualiza o item existente no repositório
+                repository.atualizarItemCarrinho(novoItem)
             } else {
                 val novoItem = ItemCarrinho(produto, quantidade)
                 lista.add(novoItem)
-                repository.addItemCarrinho(novoItem) // Adiciona um novo item no repositório
+                repository.addItemCarrinho(novoItem)
             }
             _itens.value = lista
         }
@@ -46,10 +43,15 @@ class CarrinhoViewModel : ViewModel() {
         }
     }
 
-    public fun limparCarrinho() {
+    fun limparCarrinho() {
         viewModelScope.launch {
             repository.limparCarrinho()
             _itens.value = mutableListOf()
         }
+    }
+
+    fun calcularTotalCompra(): Double {
+        val lista = _itens.value ?: return 0.0
+        return lista.sumByDouble { it.produto.preco * it.quantidade }
     }
 }

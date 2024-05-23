@@ -18,11 +18,14 @@ class CarrinhoActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(CarrinhoViewModel::class.java)
 
         val listView = binding.carrinhoListView
+        val totalTextView = binding.totalTextView
 
         viewModel.itens.observe(this) { itens ->
             itens?.let {
-                val adapter = CarrinhoAdapter(this, itens)
+                val adapter = CarrinhoAdapter(this, it)
                 listView.adapter = adapter
+                val total = viewModel.calcularTotalCompra()
+                totalTextView.text = "Total: R$ %.2f".format(total)
             }
         }
 
