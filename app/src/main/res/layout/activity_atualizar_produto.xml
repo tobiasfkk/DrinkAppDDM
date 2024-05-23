@@ -38,7 +38,7 @@
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="3"
-                android:text="CADASTRO DE PRODUTO"
+                android:text="ATUALIZAR PRODUTO"
                 android:textColor="#333333"
                 android:textSize="25dp"
                 android:textStyle="bold" />
@@ -49,7 +49,7 @@
                 android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_image" />
+                />
 
             <EditText
                 android:id="@+id/produto_nome"
@@ -68,33 +68,14 @@
                 android:hint="Descricao Produto"
                 android:inputType="text" />
 
-            <!-- LinearLayout horizontal para EditText e Button -->
-            <LinearLayout
+            <EditText
+                android:id="@+id/produto_imagem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical">
+                android:fontFamily="@font/barlow_semibold"
+                android:hint="Imagem Produto"
+                android:inputType="text" />
 
-                <EditText
-                    android:id="@+id/produto_imagem"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/barlow_semibold"
-                    android:hint="Imagem Produto"
-                    android:inputType="text" />
-
-                <Button
-                    android:id="@+id/carregar_imagem_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Carregar"
-                    android:backgroundTint="#FF6EC7"
-                    android:textColor="#FFFFFF"
-                    android:fontFamily="@font/barlow_semibold" />
-            </LinearLayout>
 
             <EditText
                 android:id="@+id/produto_preco"
@@ -134,7 +115,7 @@
                 android:layout_gravity="center_horizontal"
                 android:scaleType="fitCenter"
                 android:layout_marginBottom="30dp"
-                android:src="@drawable/logosemfundo" />
+                android:src="@drawable/logosemfundo"/>
 
         </LinearLayout>
 
