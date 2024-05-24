@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import br.udesc.drinkappddm.Api.ApiClient
 import br.udesc.drinkappddm.Api.ApiService
 import br.udesc.drinkappddm.R
+import br.udesc.drinkappddm.ViewModel.CarrinhoViewModel
 import br.udesc.drinkappddm.ViewModel.PagamentoViewModel
 import br.udesc.drinkappddm.databinding.ActivityPagamentoBinding
 import kotlinx.coroutines.CoroutineScope
@@ -47,6 +48,7 @@ class PagamentoActivity : AppCompatActivity() {
                 val resultado = fetchPaymentValidation()
                 Toast.makeText(this@PagamentoActivity, resultado, Toast.LENGTH_SHORT).show()
                 term()
+
             }
         }
     }
@@ -69,6 +71,8 @@ class PagamentoActivity : AppCompatActivity() {
     private fun term() {
         val intent = Intent(this@PagamentoActivity, CatalogoCategoriaActivity::class.java)
         startActivity(intent)
+        val carrinhoViewModel = ViewModelProvider(this).get(CarrinhoViewModel::class.java)
+        carrinhoViewModel.limparCarrinho()
         finish()
     }
 }
