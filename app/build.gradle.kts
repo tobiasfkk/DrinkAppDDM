@@ -60,4 +60,11 @@ dependencies {
     implementation("com.google.firebase:firebase-database:16.0.4")
     implementation(platform("com.google.firebase:firebase-bom:30.0.0"))
     implementation("com.google.firebase:firebase-storage:20.0.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+//For serialising JSONP add converter-scalars
+    implementation("com.squareup.retrofit2:converter-scalars:2.1.0")
+//An Adapter for adapting RxJava 2.x types.
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.2.0")
+
 }

@@ -7,9 +7,18 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import br.udesc.drinkappddm.Api.ApiClient
+import br.udesc.drinkappddm.Api.ApiService
+import br.udesc.drinkappddm.Api.PaymentValidationResponse
 import br.udesc.drinkappddm.R
 import br.udesc.drinkappddm.R.id
 import br.udesc.drinkappddm.ViewModel.PagamentoViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.Response
+
 
 class PagamentoActivity : AppCompatActivity() {
 
@@ -35,15 +44,25 @@ class PagamentoActivity : AppCompatActivity() {
             val cvvCartao = etCvvCartao.text.toString()
 
             viewModel.realizarPagamento(nomeCartao, numeroCartao, validadeCartao, cvvCartao)
+            CoroutineScope(Dispatchers.Main).launch {
+                val resultado = fetchPaymentValidation()
+                // Use o resultado aqui
+                Toast.makeText(this@PagamentoActivity, resultado, Toast.LENGTH_SHORT).show()
+            }
         }
 
-        viewModel.getPagamentoRealizado().observe(this) { pagamentoRealizado ->
-            if (pagamentoRealizado) {
-                // Mostrar mensagem de sucesso
-                Toast.makeText(this, "Pagamento realizado com sucesso!", Toast.LENGTH_SHORT).show()
-            } else {
-                // Mostrar mensagem de erro
-                Toast.makeText(this, "Erro ao realizar pagamento.", Toast.LENGTH_SHORT).show()
+    }
+    suspend fun fetchPaymentValidation(): String {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response: Response<String> = ApiClient.retrofit.create(ApiService::class.java).getPaymentValidation()
+                if (response.isSuccessful && response.code() == 201) {
+                    response.body() ?: "Pagamento Verificado!" // Use response.body() or default message
+                } else {
+                    "Erro ao obter validação de pagamento: ${response.message()}"
+                }
+            } catch (e: Exception) {
+                "jjjj: ${e.message}"
             }
         }
     }
