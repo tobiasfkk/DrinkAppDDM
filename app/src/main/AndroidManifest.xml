@@ -58,9 +58,11 @@
             android:excludeFromRecents="true">
         </activity>
         <activity android:name=".View.CarrinhoActivity"/>
-
+        <activity android:name=".View.Admin.EditarProdutoActivity"/>
+        <activity android:name=".View.Admin.ListagemProdutoEditActivity"/>
+        <activity android:name=".View.ListagemCategoriaActivity"/>
         <activity
-            android:name=".View.GerenciarProdutoActivity"
+            android:name=".View.Admin.GerenciarProdutoActivity"
             android:exported="true"
             android:excludeFromRecents="true">
         </activity>

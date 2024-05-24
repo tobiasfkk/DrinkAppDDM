@@ -18,6 +18,21 @@ class ProdutoRepository {
         }
     }
 
+    suspend fun atualizarProduto(produto: Produto) {
+        try {
+            val produtosSnapshot = produtosCollection
+                .whereEqualTo("nome", produto.nome)
+                .get()
+                .await()
+            if (produtosSnapshot.documents.isNotEmpty()) {
+                val produtoDoc = produtosSnapshot.documents.first()
+                produtosCollection.document(produtoDoc.id).set(produto).await()
+            }
+        } catch (e: Exception) {
+            // Tratar possíveis exceções aqui
+        }
+    }
+
     suspend fun obterCategorias(): List<Categoria> {
         return try {
             val categoriasSnapshot = db.collection("categorias").get().await()

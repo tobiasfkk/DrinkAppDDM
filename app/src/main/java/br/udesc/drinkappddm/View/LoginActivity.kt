@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import br.udesc.drinkappddm.View.Admin.GerenciarProdutoActivity
 import br.udesc.drinkappddm.ViewModel.CarrinhoViewModel
 import br.udesc.drinkappddm.databinding.ActivityMainBinding
 import com.google.firebase.Firebase
@@ -44,10 +45,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun startActivity() {
-        val intent = Intent(this, CatalogoCategoriaActivity::class.java)
+//        val intent = Intent(this, CatalogoCategoriaActivity::class.java)
 //        val intent = Intent(this, PagamentoActivity::class.java)
         //val intent = Intent(this, ProdutoActivity::class.java)
-//        val intent = Intent(this, GerenciarProdutoActivity::class.java)
+        val intent = Intent(this, GerenciarProdutoActivity::class.java)
         startActivity(intent)
         //finish() //  eencerra a tela
     }

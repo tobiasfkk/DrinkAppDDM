@@ -1,5 +1,7 @@
 package br.udesc.drinkappddm.Model
 
+import java.io.Serializable
+
 data class Produto(
     val nome: String = "",
     val imagem: String = "",
@@ -7,4 +9,4 @@ data class Produto(
     val categoria: Categoria = Categoria(""),
     val descricao: String = "",
     val quantidadeEstoque: Int = 0
-)
+) : Serializable
