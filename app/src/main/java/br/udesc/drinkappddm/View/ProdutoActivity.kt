@@ -45,6 +45,7 @@ class ProdutoActivity : AppCompatActivity() {
         // Configurar o clique no botão "Salvar Produto"
         binding.produtoSalvar.setOnClickListener {
             salvarProduto()
+
         }
         binding.carregarImagemButton.setOnClickListener {
             abrirGaleria()

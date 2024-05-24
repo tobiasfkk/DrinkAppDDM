@@ -3,17 +3,18 @@ package br.udesc.drinkappddm.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import br.udesc.drinkappddm.repository.PagamentoRepository
+import br.udesc.drinkappddm.repository.ProdutoRepository
 
 class PagamentoViewModel : ViewModel() {
 
     private val pagamentoRealizado = MutableLiveData<Boolean>()
-
+    private val pagamentoRepository = PagamentoRepository()
     fun realizarPagamento(
         nomeCartao: String,
         numeroCartao: String,
         validadeCartao: String,
-        cvvCartao: String
-    ) {
+        cvvCartao: String){
         // Simular o processamento de pagamento
         val pagamentoSimulado = simularPagamentoComCartao(nomeCartao, numeroCartao, validadeCartao, cvvCartao)
 
@@ -26,13 +27,9 @@ class PagamentoViewModel : ViewModel() {
         numeroCartao: String,
         validadeCartao: String,
         cvvCartao: String
-    ): Boolean {
-        // Implementar lógica para simular o pagamento (ex: validação de dados, simulação de comunicação com API)
-        // Retornar true se o pagamento for simulado com sucesso, false se houver algum erro
-        return true // Simulação de pagamento bem-sucedido
-    }
 
-    fun getPagamentoRealizado(): LiveData<Boolean> {
-        return pagamentoRealizado
+    ): Boolean {
+
+        return true // Simulação de pagamento bem-sucedido
     }
 }

@@ -8,10 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.udesc.drinkappddm.Api.ApiClient
 import br.udesc.drinkappddm.Api.ApiService
+import br.udesc.drinkappddm.Model.Pagamento
+import br.udesc.drinkappddm.Model.Produto
 import br.udesc.drinkappddm.R
 import br.udesc.drinkappddm.ViewModel.CarrinhoViewModel
 import br.udesc.drinkappddm.ViewModel.PagamentoViewModel
 import br.udesc.drinkappddm.databinding.ActivityPagamentoBinding
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -42,11 +45,13 @@ class PagamentoActivity : AppCompatActivity() {
             val numeroCartao = binding.etNumeroCartao.text.toString()
             val validadeCartao = binding.etValidadeCartao.text.toString()
             val cvvCartao = binding.etCvvCartao.text.toString()
+            val pagamento = Pagamento(numeroCartao, total)
 
             viewModel.realizarPagamento(nomeCartao, numeroCartao, validadeCartao, cvvCartao)
             CoroutineScope(Dispatchers.Main).launch {
                 val resultado = fetchPaymentValidation()
                 Toast.makeText(this@PagamentoActivity, resultado, Toast.LENGTH_SHORT).show()
+                salvarPagamento(pagamento)
                 term()
 
             }
@@ -74,5 +79,19 @@ class PagamentoActivity : AppCompatActivity() {
         val carrinhoViewModel = ViewModelProvider(this).get(CarrinhoViewModel::class.java)
         carrinhoViewModel.limparCarrinho()
         finish()
+    }
+    private fun salvarPagamento(pagamento: Pagamento) {
+        salvarPagamentoNoFirestore(pagamento)
+    }
+    private fun salvarPagamentoNoFirestore(pagamento: Pagamento) {
+        val db = FirebaseFirestore.getInstance()
+        db.collection("pagamento")
+            .add(pagamento)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Pagamento Salvo Com Sucesso!", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Erro ao salvar pagamento: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 }
