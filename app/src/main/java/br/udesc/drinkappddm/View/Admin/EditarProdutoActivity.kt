@@ -1,11 +1,13 @@
 package br.udesc.drinkappddm.View.Admin
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import br.udesc.drinkappddm.Model.Produto
 import br.udesc.drinkappddm.R
+import br.udesc.drinkappddm.View.ListagemCategoriaActivity
 import br.udesc.drinkappddm.repository.ProdutoRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -52,9 +54,12 @@ class EditarProdutoActivity : AppCompatActivity() {
                     quantidadeEstoque = quantidadeEstoqueEditText.text.toString().toInt()
                 )
 
+                val contexto = this@EditarProdutoActivity
+
                 CoroutineScope(Dispatchers.IO).launch {
                     produtoRepository.atualizarProduto(produtoAtualizado)
-                    finish()
+                    val intent = Intent(contexto, ListagemCategoriaActivity::class.java)
+                    startActivity(intent)
                 }
             }
         }
