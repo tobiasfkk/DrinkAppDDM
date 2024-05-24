@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background_color">#FFFFFF</color> <!-- cor de fundo da tela -->
-    <color name="primary_color_purple">#7E57C2</color> <!-- cor principal roxa -->
-    <color name="primary_color_orange">#FFA726</color> <!-- cor principal laranja -->
-    <color name="text_color">#333333</color> <!-- cor do texto -->
-
-    <!-- Cores adicionadas conforme o erro informado -->
+    <color name="background_color">#FFFFFF</color>
+    <color name="primary_color_purple">#7E57C2</color>
+    <color name="primary_color_orange">#FFA726</color>
+    <color name="text_color">#333333</color>
     <color name="purple_500">#6200EE</color>
     <color name="purple_700">#3700B3</color>
     <color name="white">#FFFFFF</color>
