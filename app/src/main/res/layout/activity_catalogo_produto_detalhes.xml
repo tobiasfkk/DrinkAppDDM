@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/background_gradienttelas"
     android:orientation="horizontal"
     android:padding="8dp">
 
@@ -15,7 +16,13 @@
             android:id="@+id/produtoNomeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_semibold"
+            android:shadowColor="#FF000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
             android:text="Nome do Produto"
+            android:textColor="#333333"
             android:textSize="16sp"
             android:textStyle="bold"
             android:visibility="visible" />
@@ -24,6 +31,7 @@
             android:id="@+id/produtoPrecoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_semibold"
             android:text="Preço: R$ 0,00"
             android:textSize="14sp"
             android:visibility="gone" />
@@ -32,6 +40,7 @@
             android:id="@+id/produtoDescricaoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_semibold"
             android:text="Descrição do produto"
             android:visibility="gone" />
 
@@ -53,7 +62,7 @@
         <Space
             android:layout_width="12dp"
             android:layout_height="wrap_content"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
     </LinearLayout>
 
@@ -62,6 +71,8 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:backgroundTint="#FF6EC7"
+        android:fontFamily="@font/barlow_semibold"
         android:text="Adicionar ao carrinho"
         android:textSize="10sp"
         android:visibility="gone" />

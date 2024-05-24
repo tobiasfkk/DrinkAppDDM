@@ -44,10 +44,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun startActivity() {
-        val intent = Intent(this, CatalogoCategoriaActivity::class.java)
+       val intent = Intent(this, CatalogoCategoriaActivity::class.java)
 //        val intent = Intent(this, PagamentoActivity::class.java)
         //val intent = Intent(this, ProdutoActivity::class.java)
-//        val intent = Intent(this, GerenciarProdutoActivity::class.java)
+    //    val intent = Intent(this, GerenciarProdutoActivity::class.java)
         startActivity(intent)
         //finish() //  eencerra a tela
     }

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/background_gradienttelas"
     android:orientation="horizontal"
     android:padding="8dp">
 
@@ -10,6 +11,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:shadowColor="#FF000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        android:fontFamily="@font/barlow_semibold"
         android:text="Nome do Produto"
         android:textSize="16sp" />
 
@@ -17,6 +25,7 @@
         android:id="@+id/produtoQuantidadeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/barlow_semibold"
         android:layout_marginEnd="8dp"
         android:text="Quantidade: 1"
         android:textSize="16sp" />
@@ -25,6 +34,7 @@
         android:id="@+id/produtoPrecoTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/barlow_semibold"
         android:text="Preço: R$ 0,00"
         android:textSize="16sp" />
 </LinearLayout>
