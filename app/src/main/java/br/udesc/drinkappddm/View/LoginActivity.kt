@@ -29,11 +29,11 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth//J.Parro
 
         binding?.btnLogin?.setOnClickListener{//RECUPERANDO OS DADOS DA TELA DE LOGIN
-            val email: String = binding?.etEmail?.text.toString()
-            val password: String = binding?.etPassword?.text.toString()
+            //val email: String = binding?.etEmail?.text.toString()
+            //val password: String = binding?.etPassword?.text.toString()
 
-           // val email: String = "teste@teste.com"
-            //val password: String = "12345678"
+            val email: String = "teste@teste.com"
+            val password: String = "12345678"
 
 
             if(email.isNotEmpty() && password.isNotEmpty()){
