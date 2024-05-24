@@ -29,11 +29,8 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth//J.Parro
 
         binding?.btnLogin?.setOnClickListener{//RECUPERANDO OS DADOS DA TELA DE LOGIN
-            //val email: String = binding?.etEmail?.text.toString()
-            //val password: String = binding?.etPassword?.text.toString()
-
-            val email: String = "teste@teste.com"
-            val password: String = "12345678"
+            val email: String = binding?.etEmail?.text.toString()
+            val password: String = binding?.etPassword?.text.toString()
 
 
             if(email.isNotEmpty() && password.isNotEmpty()){
@@ -46,17 +43,6 @@ class LoginActivity : AppCompatActivity() {
         binding?.tvCreateAccount?.setOnClickListener {
             startActivity(intent)
         }
-    }
-
-    private fun startActivity() {
-
-//      val intent = Intent(this, CatalogoCategoriaActivity::class.java)
-        val intent = Intent(this, PagamentoActivity::class.java)
-//      val intent = Intent(this, ProdutoActivity::class.java)
-//      val intent = Intent(this, GerenciarProdutoActivity::class.java)
-
-        startActivity(intent)
-
     }
 
     private fun signInWithEmailAndPassword(email: String, password: String) {
