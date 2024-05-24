@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.udesc.drinkappddm.Api.ApiClient
 import br.udesc.drinkappddm.Api.ApiService
+import br.udesc.drinkappddm.Model.Entrega
 import br.udesc.drinkappddm.Model.Pagamento
 import br.udesc.drinkappddm.Model.Produto
 import br.udesc.drinkappddm.R
@@ -36,6 +37,11 @@ class PagamentoActivity : AppCompatActivity() {
 
         // Ler o valor total passado como parâmetro
         val total = intent.getDoubleExtra("total", 0.0)
+        val endereco = intent.getStringExtra("endereco").toString()
+        val numero = intent.getStringExtra("numero").toString()
+        val bairro = intent.getStringExtra("bairro").toString()
+
+
 
         // Atualizar o TextView com o valor total
         binding.tvTotalPagamento.text = "Total: R$ %.2f".format(total)
@@ -45,7 +51,7 @@ class PagamentoActivity : AppCompatActivity() {
             val numeroCartao = binding.etNumeroCartao.text.toString()
             val validadeCartao = binding.etValidadeCartao.text.toString()
             val cvvCartao = binding.etCvvCartao.text.toString()
-            val pagamento = Pagamento(numeroCartao, total)
+            val pagamento = Pagamento(numeroCartao, total,endereco,numero,bairro)
 
             viewModel.realizarPagamento(nomeCartao, numeroCartao, validadeCartao, cvvCartao)
             CoroutineScope(Dispatchers.Main).launch {

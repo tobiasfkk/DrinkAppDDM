@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradienttelas">
+
+
+    <LinearLayout
+        android:id="@+id/ll_dados_cartao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="40dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="33dp">
+
+        <TextView
+            android:id="@+id/tv_titulo_pagamento"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/barlow_semibold"
+            android:padding="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:shadowColor="#FF000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:text="ENDEREÇO DE ENTREGA"
+            android:textColor="#333333"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+
+
+        <EditText
+            android:id="@+id/endereco_rua"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_semibold"
+            android:hint="Rua" />
+
+        <EditText
+            android:id="@+id/endereco_numero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_semibold"
+            android:hint="Numero"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/endereco_bairro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/barlow_semibold"
+            android:hint="Bairro" />
+
+        <Button
+            android:id="@+id/btn_pagar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FF6EC7"
+            android:fontFamily="@font/barlow_semibold"
+            android:text="Continuar"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_cancelar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FF6EC7"
+            android:fontFamily="@font/barlow_semibold"
+            android:text="Cancelar"
+            android:textColor="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/imageView_logopagamento"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logosemfundo" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

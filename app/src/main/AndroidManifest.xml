@@ -40,6 +40,11 @@
             android:exported="true"
             android:excludeFromRecents="true">
         </activity>
+        <activity
+            android:name=".View.EnderecoActivity"
+            android:exported="true"
+            android:excludeFromRecents="true">
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

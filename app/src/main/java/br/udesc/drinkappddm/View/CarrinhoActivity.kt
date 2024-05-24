@@ -33,12 +33,12 @@ class CarrinhoActivity : AppCompatActivity() {
 
         binding.finalizarCompraButton.setOnClickListener {
             val total = viewModel.calcularTotalCompra()
-            abrirTelaPagamento(total)
+            abrirTelaEndereco(total)
         }
     }
 
-    private fun abrirTelaPagamento(total: Double) {
-        val intent = Intent(this, PagamentoActivity::class.java)
+    private fun abrirTelaEndereco(total: Double) {
+        val intent = Intent(this, EnderecoActivity::class.java)
         intent.putExtra("total", total)
         startActivity(intent)
     }
