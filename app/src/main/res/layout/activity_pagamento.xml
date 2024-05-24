@@ -7,99 +7,107 @@
     android:background="@drawable/background_gradienttelas">
 
 
-    <TextView
-        android:id="@+id/tv_titulo_pagamento"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="72dp"
-        android:drawablePadding="8dp"
-        android:fontFamily="@font/barlow_semibold"
-        android:padding="16dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:shadowColor="#FF000000"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:shadowRadius="3"
-        android:text="PAGAMENTO"
-        android:textColor="#333333"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
-        android:id="@+id/ll_dados_cartao"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:padding="40dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="144dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/et_nome_cartao"
+        <TextView
+            android:id="@+id/tv_titulo_pagamento"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/barlow_semibold"
+            android:padding="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:shadowColor="#FF000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:text="PAGAMENTO"
+            android:textColor="#333333"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/ll_dados_cartao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/barlow_semibold"
-            android:hint="Nome no Cartão" />
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:padding="40dp">
 
-        <EditText
-            android:id="@+id/et_numero_cartao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/barlow_semibold"
-            android:hint="Número do Cartão"
-            android:inputType="number" />
+            <TextView
+                android:id="@+id/tv_total_pagamento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/barlow_semibold"
+                android:text="Total: R$ 0,00"
+                android:textColor="#333333"
+                android:textSize="18sp" />
 
-        <EditText
-            android:id="@+id/et_validade_cartao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/barlow_semibold"
-            android:hint="Validade (MM/AA)"
-            android:inputType="number" />
+            <EditText
+                android:id="@+id/et_nome_cartao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/barlow_semibold"
+                android:hint="Nome no Cartão" />
 
-        <EditText
-            android:id="@+id/et_cvv_cartao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/barlow_semibold"
-            android:hint="CVV"
-            android:inputType="numberPassword" />
+            <EditText
+                android:id="@+id/et_numero_cartao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/barlow_semibold"
+                android:hint="Número do Cartão"
+                android:inputType="number" />
 
-        <Button
-            android:id="@+id/btn_pagar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:fontFamily="@font/barlow_semibold"
-            android:backgroundTint="#FF6EC7"
-            android:text="Continuar" />
+            <EditText
+                android:id="@+id/et_validade_cartao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/barlow_semibold"
+                android:hint="Validade (MM/AA)"
+                android:inputType="number" />
 
-        <Button
-            android:id="@+id/btn_cancelar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:fontFamily="@font/barlow_semibold"
-            android:backgroundTint="#FF6EC7"
-            android:text="Cancelar" />
+            <EditText
+                android:id="@+id/et_cvv_cartao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/barlow_semibold"
+                android:hint="CVV"
+                android:inputType="numberPassword" />
 
+            <Button
+                android:id="@+id/btn_pagar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FF6EC7"
+                android:fontFamily="@font/barlow_semibold"
+                android:text="Continuar"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btn_cancelar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FF6EC7"
+                android:fontFamily="@font/barlow_semibold"
+                android:text="Cancelar"
+                android:textColor="#FFFFFF" />
+
+            <ImageView
+                android:id="@+id/imageView_logopagamento"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logosemfundo" />
+
+        </LinearLayout>
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView_logopagamento"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center_horizontal"
-        android:scaleType="fitCenter"
-        android:src="@drawable/logosemfundo"
-        tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="492dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

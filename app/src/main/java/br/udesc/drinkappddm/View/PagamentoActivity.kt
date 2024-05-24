@@ -3,25 +3,19 @@ package br.udesc.drinkappddm.View
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import br.udesc.drinkappddm.Api.ApiClient
 import br.udesc.drinkappddm.Api.ApiService
-import br.udesc.drinkappddm.Api.PaymentValidationResponse
 import br.udesc.drinkappddm.R
-import br.udesc.drinkappddm.R.id
 import br.udesc.drinkappddm.ViewModel.PagamentoViewModel
 import br.udesc.drinkappddm.databinding.ActivityPagamentoBinding
-import br.udesc.drinkappddm.databinding.ActivityProdutoBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
-
 
 class PagamentoActivity : AppCompatActivity() {
 
@@ -35,6 +29,12 @@ class PagamentoActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this).get(PagamentoViewModel::class.java)
+
+        // Ler o valor total passado como parâmetro
+        val total = intent.getDoubleExtra("total", 0.0)
+
+        // Atualizar o TextView com o valor total
+        binding.tvTotalPagamento.text = "Total: R$ %.2f".format(total)
 
         binding.btnPagar.setOnClickListener {
             val nomeCartao = binding.etNomeCartao.text.toString()
@@ -50,22 +50,23 @@ class PagamentoActivity : AppCompatActivity() {
             }
         }
     }
+
     suspend fun fetchPaymentValidation(): String {
         return withContext(Dispatchers.IO) {
             try {
                 val response: Response<String> = ApiClient.retrofit.create(ApiService::class.java).getPaymentValidation()
                 if (response.isSuccessful && response.code() == 201) {
-                     "Pagamento Verificado!" // Use response.body() or default message
-
+                    "Pagamento Verificado!" // Use response.body() or default message
                 } else {
                     "Erro ao obter validação de pagamento: ${response.message()}"
                 }
             } catch (e: Exception) {
-                "jjjj: ${e.message}"
+                "Erro: ${e.message}"
             }
         }
     }
-    private fun term(){
+
+    private fun term() {
         val intent = Intent(this@PagamentoActivity, CatalogoCategoriaActivity::class.java)
         startActivity(intent)
         finish()
