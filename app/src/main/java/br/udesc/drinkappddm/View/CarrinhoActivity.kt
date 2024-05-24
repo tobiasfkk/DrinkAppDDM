@@ -1,5 +1,6 @@
 package br.udesc.drinkappddm.View
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -31,6 +32,8 @@ class CarrinhoActivity : AppCompatActivity() {
 
         binding.finalizarCompraButton.setOnClickListener {
             // Lógica para finalizar a compra
+            val intent = Intent(this, PagamentoActivity::class.java)
+            startActivity(intent)
         }
     }
 }
