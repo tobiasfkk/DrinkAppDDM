@@ -3,4 +3,4 @@
 
 ### Para iniciar a API, executar o comando no caminho ...DrinkAppDDM/ApiAPP
 
-    node infex.js
+    node index.js
