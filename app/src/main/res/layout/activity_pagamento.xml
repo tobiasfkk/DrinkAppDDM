@@ -15,7 +15,8 @@
         android:orientation="vertical"
         android:padding="40dp"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="33dp">
+        tools:layout_editor_absoluteY="33dp"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/tv_titulo_pagamento"
