@@ -7,5 +7,8 @@ data class Pagamento(
     val total: Double,
     val endereco: String = "",
     val numero: String = "",
-    val bairro: String = ""
-) : Serializable
+    val bairro: String = "",
+    val validade: String = "",
+    val cvv: String = ""
+) : Serializable {
+}

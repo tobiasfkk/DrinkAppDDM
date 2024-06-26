@@ -1,38 +1,39 @@
 package br.udesc.drinkappddm.View
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
-import br.udesc.drinkappddm.Api.ApiClient
-import br.udesc.drinkappddm.Api.ApiService
-import br.udesc.drinkappddm.Model.Entrega
-import br.udesc.drinkappddm.Model.Pagamento
-import br.udesc.drinkappddm.Model.Produto
 import br.udesc.drinkappddm.R
-import br.udesc.drinkappddm.ViewModel.CarrinhoViewModel
 import br.udesc.drinkappddm.ViewModel.PagamentoViewModel
-import br.udesc.drinkappddm.databinding.ActivityPagamentoBinding
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Response
+import br.udesc.drinkappddm.Model.Pagamento
+import br.udesc.drinkappddm.ui.*
+import kotlinx.coroutines.*
 
-class PagamentoActivity : AppCompatActivity() {
+class PagamentoActivity : ComponentActivity() {
 
     private lateinit var viewModel: PagamentoViewModel
-    private lateinit var binding: ActivityPagamentoBinding
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPagamentoBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         viewModel = ViewModelProvider(this).get(PagamentoViewModel::class.java)
 
         // Ler o valor total passado como parâmetro
@@ -41,63 +42,145 @@ class PagamentoActivity : AppCompatActivity() {
         val numero = intent.getStringExtra("numero").toString()
         val bairro = intent.getStringExtra("bairro").toString()
 
+        setContent {
 
-
-        // Atualizar o TextView com o valor total
-        binding.tvTotalPagamento.text = "Total: R$ %.2f".format(total)
-
-        binding.btnPagar.setOnClickListener {
-            val nomeCartao = binding.etNomeCartao.text.toString()
-            val numeroCartao = binding.etNumeroCartao.text.toString()
-            val validadeCartao = binding.etValidadeCartao.text.toString()
-            val cvvCartao = binding.etCvvCartao.text.toString()
-            val pagamento = Pagamento(numeroCartao, total,endereco,numero,bairro)
-
-            viewModel.realizarPagamento(nomeCartao, numeroCartao, validadeCartao, cvvCartao)
-            CoroutineScope(Dispatchers.Main).launch {
-                val resultado = fetchPaymentValidation()
-                Toast.makeText(this@PagamentoActivity, resultado, Toast.LENGTH_SHORT).show()
-                salvarPagamento(pagamento)
-                term()
-
-            }
-        }
-    }
-
-    suspend fun fetchPaymentValidation(): String {
-        return withContext(Dispatchers.IO) {
-            try {
-                val response: Response<String> = ApiClient.retrofit.create(ApiService::class.java).getPaymentValidation()
-                if (response.isSuccessful && response.code() == 201) {
-                    "Pagamento Verificado!" // Use response.body() or default message
-                } else {
-                    "Erro ao obter validação de pagamento: ${response.message()}"
+            PagamentoScreen(total, endereco, numero, bairro, onPaymentCompleted = { pagamento ->
+                viewModel.realizarPagamento(
+                    nomeCartao = pagamento.cartao,
+                    numeroCartao = pagamento.numero,
+                    validadeCartao = pagamento.validade,
+                    cvvCartao = pagamento.cvv
+                )
+                CoroutineScope(Dispatchers.Main).launch {
+                    val resultado = viewModel.fetchPaymentValidation()
+                    Toast.makeText(this@PagamentoActivity, resultado, Toast.LENGTH_SHORT).show()
+                    viewModel.salvarPagamento(pagamento)
+                    term()
                 }
-            } catch (e: Exception) {
-                "Erro: ${e.message}"
-            }
+            })
+
         }
     }
 
     private fun term() {
         val intent = Intent(this@PagamentoActivity, CatalogoCategoriaActivity::class.java)
         startActivity(intent)
-        val carrinhoViewModel = ViewModelProvider(this).get(CarrinhoViewModel::class.java)
-        carrinhoViewModel.limparCarrinho()
         finish()
     }
-    private fun salvarPagamento(pagamento: Pagamento) {
-        salvarPagamentoNoFirestore(pagamento)
-    }
-    private fun salvarPagamentoNoFirestore(pagamento: Pagamento) {
-        val db = FirebaseFirestore.getInstance()
-        db.collection("pagamento")
-            .add(pagamento)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Pagamento Salvo Com Sucesso!", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Erro ao salvar pagamento: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
+}
+
+@Composable
+fun PagamentoScreen(
+    total: Double,
+    endereco: String,
+    numero: String,
+    bairro: String,
+    onPaymentCompleted: (Pagamento) -> Unit
+) {
+    var nomeCartao by remember { mutableStateOf("") }
+    var numeroCartao by remember { mutableStateOf("") }
+    var validadeCartao by remember { mutableStateOf("") }
+    var cvvCartao by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(Color(0xFF6EC7), Color(0xFF6EC7))
+                )
+            )
+            .padding(40.dp),
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "PAGAMENTO",
+            fontSize = 25.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF333333),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 16.dp)
+        )
+
+        Text(
+            text = "Total: R$ %.2f".format(total),
+            fontSize = 18.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = Color(0xFF333333),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 20.dp)
+        )
+
+        OutlinedTextField(
+            value = nomeCartao,
+            onValueChange = { nomeCartao = it },
+            label = { Text("Nome no Cartão") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        OutlinedTextField(
+            value = numeroCartao,
+            onValueChange = { numeroCartao = it },
+            label = { Text("Número do Cartão") },
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        OutlinedTextField(
+            value = validadeCartao,
+            onValueChange = { validadeCartao = it },
+            label = { Text("Validade (MM/AA)") },
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        OutlinedTextField(
+            value = cvvCartao,
+            onValueChange = { cvvCartao = it },
+            label = { Text("CVV") },
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password),
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = {
+                val pagamento = Pagamento(
+                    cartao = nomeCartao,
+                    total = total,
+                    endereco = endereco,
+                    numero = numero,
+                    bairro = bairro
+                )
+                onPaymentCompleted(pagamento)
+            },
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF6EC7))
+        ) {
+            Text(text = "Continuar", color = Color.White)
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Button(
+            onClick = { /* Handle cancel action */ },
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF6EC7))
+        ) {
+            Text(text = "Cancelar", color = Color.White)
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Image(
+            painter = painterResource(id = R.drawable.logosemfundo),
+            contentDescription = null,
+            modifier = Modifier
+                .size(150.dp)
+                .align(Alignment.CenterHorizontally)
+        )
     }
 }
