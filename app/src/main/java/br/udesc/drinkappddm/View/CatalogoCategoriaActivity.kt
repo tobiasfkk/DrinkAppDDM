@@ -2,57 +2,43 @@ package br.udesc.drinkappddm.View
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import br.udesc.drinkappddm.Model.Categoria
-import br.udesc.drinkappddm.R
 import br.udesc.drinkappddm.ViewModel.CatalogoCategoriaViewModel
-import br.udesc.drinkappddm.databinding.ActivityCatalogoCategoriaBinding
 
-class CatalogoCategoriaActivity : AppCompatActivity() {
+class CatalogoCategoriaActivity : ComponentActivity() {
+
     private lateinit var viewModel: CatalogoCategoriaViewModel
-    private lateinit var binding: ActivityCatalogoCategoriaBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCatalogoCategoriaBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         viewModel = ViewModelProvider(this).get(CatalogoCategoriaViewModel::class.java)
 
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
-        val listView = findViewById<ListView>(R.id.catalogoListView)
-        listView.adapter = adapter
-
-        // Obter categorias da ViewModel e preencher o Spinner
-        viewModel.obterCategorias()
-        // Observar as categorias na ViewModel
-        viewModel.categorias.observe(this) { categorias ->
-            categorias?.let {
-                adapter.clear()
-                for (categoria in it) {
-                    adapter.add(categoria.nome)
-                }
+        setContent {
+            val categorias = viewModel.categorias.observeAsState(emptyList())
+            CatalogoCategoriaScreen(categorias.value) { categoria ->
+                abrirTelaProdutos(categoria)
             }
         }
 
-        // Iniciar a obtenção das categorias
         viewModel.obterCategorias()
-
-        binding.catalogoListView.setOnItemClickListener { parent, view, position, id ->
-            // Obtendo o item selecionado
-            val itemSelecionado = parent.getItemAtPosition(position)
-
-            // Verification se o item selecionado é uma instância de Categoria
-            if (itemSelecionado is String) {
-                // Aqui você pode criar uma instância de Categoria com base no item selecionado
-                val categoriaSelecionada = Categoria(itemSelecionado)
-                abrirTelaProdutos(categoriaSelecionada)
-            }
-        }
     }
 
     private fun abrirTelaProdutos(categoria: Categoria) {
@@ -60,4 +46,38 @@ class CatalogoCategoriaActivity : AppCompatActivity() {
         intent.putExtra("categoria", categoria)
         startActivity(intent)
     }
+}
+
+@Composable
+fun CatalogoCategoriaScreen(categorias: List<Categoria>, onCategoriaClick: (Categoria) -> Unit) {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(Color.Blue, Color.Cyan)
+                )
+            )
+            .padding(16.dp)
+    ) {
+        items(categorias) { categoria ->
+            Text(
+                text = categoria.nome,
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp)
+                    .clickable { onCategoriaClick(categoria) }
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun CatalogoCategoriaScreenPreview() {
+    CatalogoCategoriaScreen(
+        categorias = listOf(Categoria("Bebidas"), Categoria("Comidas")),
+        onCategoriaClick = {}
+    )
 }
