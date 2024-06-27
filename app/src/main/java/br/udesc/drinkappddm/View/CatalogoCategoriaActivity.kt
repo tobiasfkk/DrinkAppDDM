@@ -4,24 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import br.udesc.drinkappddm.Model.Categoria
 import br.udesc.drinkappddm.ViewModel.CatalogoCategoriaViewModel
+import br.udesc.drinkappddm.ui.theme.GradientBackground
 
 class CatalogoCategoriaActivity : ComponentActivity() {
 
@@ -50,25 +46,25 @@ class CatalogoCategoriaActivity : ComponentActivity() {
 
 @Composable
 fun CatalogoCategoriaScreen(categorias: List<Categoria>, onCategoriaClick: (Categoria) -> Unit) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(Color.Blue, Color.Cyan)
-                )
-            )
-            .padding(16.dp)
-    ) {
-        items(categorias) { categoria ->
-            Text(
-                text = categoria.nome,
-                style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(8.dp)
-                    .clickable { onCategoriaClick(categoria) }
-            )
+    GradientBackground {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            categorias.forEach { categoria ->
+                Button(
+                    onClick = { onCategoriaClick(categoria) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp)
+                ) {
+                    Text(
+                        text = categoria.nome,
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                }
+            }
         }
     }
 }
