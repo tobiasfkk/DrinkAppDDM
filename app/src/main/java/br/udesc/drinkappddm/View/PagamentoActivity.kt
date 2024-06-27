@@ -42,7 +42,6 @@ class PagamentoActivity : ComponentActivity() {
         val bairro = intent.getStringExtra("bairro").toString()
 
         setContent {
-
             PagamentoScreen(total, endereco, numero, bairro, onPaymentCompleted = { pagamento ->
                 viewModel.realizarPagamento(
                     nomeCartao = pagamento.cartao,
@@ -53,16 +52,17 @@ class PagamentoActivity : ComponentActivity() {
                 CoroutineScope(Dispatchers.Main).launch {
                     val resultado = viewModel.fetchPaymentValidation()
                     Toast.makeText(this@PagamentoActivity, resultado, Toast.LENGTH_SHORT).show()
-                    viewModel.salvarPagamento(pagamento)
-                    term()
+                    if (resultado == "Pagamento bem-sucedido") { // Certifique-se de que esta mensagem corresponde à mensagem de sucesso real
+                        viewModel.salvarPagamento(pagamento)
+                        navigateToEntregaStatus()
+                    }
                 }
             })
-
         }
     }
 
-    private fun term() {
-        val intent = Intent(this@PagamentoActivity, CatalogoCategoriaActivity::class.java)
+    private fun navigateToEntregaStatus() {
+        val intent = Intent(this@PagamentoActivity, EntregaStatusActivity::class.java)
         startActivity(intent)
         finish()
     }
