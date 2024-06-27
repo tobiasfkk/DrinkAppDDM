@@ -24,7 +24,7 @@ class EntregaStatusActivity : ComponentActivity() {
 
         setContent {
             EntregaStatusScreen {
-                val intent = Intent(this@EntregaStatusActivity, CatalogoProdutoActivity::class.java)
+                val intent = Intent(this@EntregaStatusActivity, CatalogoCategoriaActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
                 finish()

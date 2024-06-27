@@ -8,7 +8,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -52,7 +51,7 @@ class PagamentoActivity : ComponentActivity() {
                 CoroutineScope(Dispatchers.Main).launch {
                     val resultado = viewModel.fetchPaymentValidation()
                     Toast.makeText(this@PagamentoActivity, resultado, Toast.LENGTH_SHORT).show()
-                    if (resultado == "Pagamento bem-sucedido") { // Certifique-se de que esta mensagem corresponde à mensagem de sucesso real
+                    if (resultado == "Pagamento Verificado!") { // Certifique-se de que esta mensagem corresponde à mensagem de sucesso real
                         viewModel.salvarPagamento(pagamento)
                         navigateToEntregaStatus()
                     }
@@ -64,7 +63,7 @@ class PagamentoActivity : ComponentActivity() {
     private fun navigateToEntregaStatus() {
         val intent = Intent(this@PagamentoActivity, EntregaStatusActivity::class.java)
         startActivity(intent)
-        finish()
+        finish()  // Opcional: pode finalizar a activity para que o usuário não possa voltar para a tela de pagamento
     }
 }
 
