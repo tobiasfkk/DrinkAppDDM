@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -12,11 +12,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.udesc.drinkappddm.R
+import br.udesc.drinkappddm.ui.theme.GradientBackground
+import br.udesc.drinkappddm.ui.theme.HeaderTextStyle
+import br.udesc.drinkappddm.ui.theme.BodyTextStyle
 
 class EntregaStatusActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,43 +38,50 @@ class EntregaStatusActivity : ComponentActivity() {
 
 @Composable
 fun EntregaStatusScreen(onRetornarClicked: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(Color(0xFFFF6EC7), Color(0xFFFF6EC7))
-                )
-            )
-            .padding(40.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "Status da Entrega",
-            fontSize = 25.sp,
-            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-            color = Color(0xFF333333),
+    GradientBackground {
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp)
-        )
-
-        Text(
-            text = "Sua entrega está a caminho!",
-            fontSize = 18.sp,
-            color = Color(0xFF333333),
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(
-            onClick = onRetornarClicked,
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF6EC7))
+                .fillMaxSize()
+                .padding(40.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Retornar à Tela Inicial", color = Color.White)
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "STATUS DA ENTREGA",
+                    style = HeaderTextStyle,
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
+
+                Text(
+                    text = "Sua entrega está a caminho!",
+                    style = BodyTextStyle,
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(
+                onClick = onRetornarClicked,
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF6EC7))
+            ) {
+                Text(text = "Retornar à Tela Inicial", color = Color.White)
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Image(
+                painter = painterResource(id = R.drawable.logosemfundo),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(150.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
         }
     }
 }
