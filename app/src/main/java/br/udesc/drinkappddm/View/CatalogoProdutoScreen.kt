@@ -7,21 +7,22 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.lifecycle.*
 import br.udesc.drinkappddm.Model.Categoria
 import br.udesc.drinkappddm.Model.Produto
 import br.udesc.drinkappddm.ViewModel.CarrinhoViewModel
 import br.udesc.drinkappddm.ViewModel.CatalogoProdutoViewModel
+import br.udesc.drinkappddm.ui.theme.GradientBackground
 
 @Composable
 fun CatalogoProdutoScreen(
@@ -36,30 +37,28 @@ fun CatalogoProdutoScreen(
         viewModel.obterProdutosPorCategoria(categoriaSelecionada)
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(Color(0xFFFF6EC7), Color(0xFFFF6EC7))
-                )
-            )
-            .padding(16.dp)
-    ) {
-        LazyColumn(modifier = Modifier.weight(1f)) {
-            items(produtos) { produto ->
-                ProdutoItem(context = context, produto = produto)
-            }
-        }
-
-        Button(
-            onClick = onVerCarrinhoClicked,
+    GradientBackground {
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF6EC7))
+                .fillMaxSize()
+                .padding(16.dp)
         ) {
-            Text(text = "Ver Carrinho", color = Color.White)
+            LazyColumn(modifier = Modifier.weight(1f)) {
+                items(produtos) { produto ->
+                    ProdutoItem(context = context, produto = produto)
+                }
+            }
+
+            Button(
+                onClick = onVerCarrinhoClicked,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    .clip(RoundedCornerShape(8.dp)),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF6EC7))
+            ) {
+                Text(text = "Ver Carrinho", color = Color.White)
+            }
         }
     }
 }
@@ -73,7 +72,7 @@ fun ProdutoItem(context: Context, produto: Produto) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .background(Color.White)
+            .background(Color.White, RoundedCornerShape(8.dp))
             .clickable { expanded = !expanded }
             .padding(16.dp)
     ) {
@@ -109,6 +108,7 @@ fun ProdutoItem(context: Context, produto: Produto) {
                     carrinhoViewModel.adicionarAoCarrinho(produto, quantidade.value)
                     Toast.makeText(context, "${produto.nome} adicionado ao carrinho", Toast.LENGTH_SHORT).show()
                 },
+                modifier = Modifier.clip(RoundedCornerShape(8.dp)),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF6EC7))
             ) {
                 Text(text = "Adicionar ao carrinho", color = Color.White)

@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -52,17 +53,31 @@ fun CatalogoCategoriaScreen(categorias: List<Categoria>, onCategoriaClick: (Cate
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            categorias.forEach { categoria ->
-                Button(
-                    onClick = { onCategoriaClick(categoria) },
+            categorias.chunked(2).forEach { rowCategorias ->
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 8.dp)
                 ) {
-                    Text(
-                        text = categoria.nome,
-                        style = MaterialTheme.typography.bodyLarge
-                    )
+                    rowCategorias.forEach { categoria ->
+                        Button(
+                            onClick = { onCategoriaClick(categoria) },
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(100.dp)
+                                .padding(4.dp),
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Text(
+                                text = categoria.nome,
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
+                    }
+                    // If there is an odd number of items, add an empty space
+                    if (rowCategorias.size < 2) {
+                        Spacer(modifier = Modifier.weight(1f))
+                    }
                 }
             }
         }
