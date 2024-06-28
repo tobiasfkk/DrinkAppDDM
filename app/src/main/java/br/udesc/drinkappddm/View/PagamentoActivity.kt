@@ -51,7 +51,7 @@ class PagamentoActivity : ComponentActivity() {
                 CoroutineScope(Dispatchers.Main).launch {
                     val resultado = viewModel.fetchPaymentValidation()
                     Toast.makeText(this@PagamentoActivity, resultado, Toast.LENGTH_SHORT).show()
-                    if (resultado == "Pagamento Verificado!") { // Certifique-se de que esta mensagem corresponde à mensagem de sucesso real
+                    if (resultado == "Pagamento Verificado!") {
                         viewModel.salvarPagamento(pagamento)
                         navigateToEntregaStatus()
                     }
